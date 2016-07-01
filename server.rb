@@ -6,8 +6,12 @@ class AerynApp < Sinatra::Base
   post ENV['WEBHOOK_ENDPOINT'] do
     request.body.rewind
     payload_body = request.body.read
-    verify_signature(payload_body)
     push = JSON.parse(payload_body)
+    puts payload_body
+
+    return if is_ping(push)
+
+    verify_signature(payload_body)
 
     return unless is_merged(push)
     username = push['pull_request']['user']['login']
@@ -27,8 +31,12 @@ class AerynApp < Sinatra::Base
 
   end
 
+  def is_ping(push)
+    push['zen'].nil? == false
+  end
+
   def is_merged(push)
-    return push['action'] == 'closed' && push['pull_request']['merged'] == true
+    push['action'] == 'closed' && push['pull_request']['merged'] == true
   end
 
   def verify_signature(payload_body)
