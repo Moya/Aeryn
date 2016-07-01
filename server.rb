@@ -3,10 +3,6 @@ require 'json'
 require 'octokit'
 
 class AerynApp < Sinatra::Base
-  get '/' do
-    "Hello there!"
-  end
-
   post ENV['WEBHOOK_ENDPOINT'] do
     request.body.rewind
     payload_body = request.body.read
