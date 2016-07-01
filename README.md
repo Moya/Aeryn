@@ -27,13 +27,15 @@ The organization's Team ID is also required. This is a number that's not easily 
 > curl -H "Authorization: token PUT_YOUR_ACCESS_TOKEN_HERE" https://api.github.com/orgs/PUT_YOUR_ORG_NAME_HERE/teams
 ```
 
-That will return a JSON list of teams on the org. Pick the one you want to invite contributors to:
+That will return a JSON list of teams on the org. Pick the one you want to invite contributors to (here's an abridged sample of what that might look like).
 
 ```json
+[
   {
     "name": "Contributors",
-    "id": 1234567,
-    ...
+    "id": 1234567
+  }
+]
 ```
 
 ### Deploy
