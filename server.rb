@@ -7,7 +7,7 @@ class AerynApp < Sinatra::Base
     request.body.rewind
     payload_body = request.body.read
     push = JSON.parse(payload_body)
-    puts payload_body
+    puts 'Received push.'
 
     return if is_ping(push)
 
@@ -30,6 +30,7 @@ class AerynApp < Sinatra::Base
       client.add_comment(repo_name, pr_number, ENV['INVITATION_MESSAGE'])
     end
 
+    'Processed.'
   end
 
   def is_ping(push)
