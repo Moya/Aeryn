@@ -1,5 +1,7 @@
 # Aeryn
 
+[![CircleCI](https://circleci.com/gh/Moya/Aeryn.svg?style=svg)](https://circleci.com/gh/Moya/Aeryn)
+
 Aeryn is a server app, written in Sinatra, used to invite new contributors to a GitHub organization team once they have a pull request merged. 
 
 ## Motivation
