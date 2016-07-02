@@ -20,13 +20,14 @@ class AerynApp < Sinatra::Base
     if client.organization_member?(ENV['ORG_NAME'], username)
       puts "Already a member."
     else
-      puts "Inviting #{username} to team."
+      team_id = ENV['CONTRIBUTOR_TEAM_ID']
+      puts "Inviting #{username} to team #{team_id}."
 
-      add_team_membership(ENV['CONTRIBUTOR_TEAM_ID'], username)
+      client.add_team_membership(team_id, username)
 
       pr_number = push['pull_request']['number']
       repo_name = push['pull_request']['base']['repo']['full_name']
-      add_comment(repo_name, pr_number, ENV['INVITATION_MESSAGE'])
+      client.add_comment(repo_name, pr_number, ENV['INVITATION_MESSAGE'])
     end
 
   end
