@@ -12,8 +12,6 @@ class AerynApp < Sinatra::Base
     request.body.rewind
     payload_body = request.body.read
     
-    api.handle_push(payload_body)
-
-    'Processed.'
+    halt 500 unless api.handle_push(payload_body)
   end
 end

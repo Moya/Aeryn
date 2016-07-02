@@ -4,6 +4,7 @@ ENV['RACK_ENV'] = 'test'
 ENV['WEBHOOK_ENDPOINT'] = '/payload'
 
 require File.join(File.dirname(__FILE__), '..', 'lib/server.rb')
+require File.join(File.dirname(__FILE__), '..', 'lib/api.rb')
 
 require 'capybara'
 require 'capybara/rspec'

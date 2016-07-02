@@ -12,7 +12,7 @@ describe 'AerynApp' do
 
   it 'verifies payload' do
   	expect(api).to receive(:handle_push).with("") do 
-      500
+      nil
     end
 
   	post '/payload'
@@ -21,7 +21,7 @@ describe 'AerynApp' do
   end
 
   it 'passes payload through' do
-    expect(api).to receive(:handle_push).with('payload')
+    expect(api).to receive(:handle_push).with('payload').and_return('Proccessed.')
 
     post '/payload', 'payload'
 
