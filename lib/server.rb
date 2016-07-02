@@ -2,17 +2,17 @@ require 'sinatra'
 require './lib/web_hook_processor'
 
 class AerynApp < Sinatra::Base
-  attr_accessor :api
+  attr_accessor :web_hook_processor
 
-  def initialize(api = Sinatra::WebHookProcessor.new)
-    @api = api
+  def initialize(web_hook_processor = Sinatra::WebHookProcessor.new)
+    @web_hook_processor = web_hook_processor
   end
 
   post ENV['WEBHOOK_ENDPOINT'] do
     request.body.rewind
     payload_body = request.body.read
 
-    if api.handle_push(payload_body, request)
+    if @web_hook_processor.handle_push(payload_body, request)
     	status 200
     	body 'Processed.'
     else

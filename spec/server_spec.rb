@@ -7,11 +7,11 @@ require 'rack/test'
 describe 'AerynApp' do
   include Rack::Test::Methods
 
-  let(:app) { AerynApp.new(api) }
-  let(:api) { double(Sinatra::WebHookProcessor) }
+  let(:app) { AerynApp.new(web_hook_processor) }
+  let(:web_hook_processor) { double(Sinatra::WebHookProcessor) }
 
   it 'verifies payload' do
-  	expect(api).to receive(:handle_push) do 
+  	expect(web_hook_processor).to receive(:handle_push) do 
       nil
     end
 
@@ -21,7 +21,7 @@ describe 'AerynApp' do
   end
 
   it 'passes payload through' do
-    expect(api).to receive(:handle_push).and_return('Proccessed.')
+    expect(web_hook_processor).to receive(:handle_push).and_return('Proccessed.')
 
     post '/payload', 'payload'
 
