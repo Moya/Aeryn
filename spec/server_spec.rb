@@ -10,7 +10,7 @@ describe 'AerynApp' do
 
   it 'always responds to ping' do
     allow(signature_verifier).to receive(:verify_signature).and_return(false)
-    allow(ping_checker).to receive(:is_ping?).and_return(true)
+    allow(ping_checker).to receive(:ping?).and_return(true)
 
     post '/payload', '{"zen": "Howdy!"}'
 
@@ -19,34 +19,34 @@ describe 'AerynApp' do
 
   it 'fails with invalid signature' do
     allow(signature_verifier).to receive(:verify_signature).and_return(false)
-    allow(ping_checker).to receive(:is_ping?).and_return(false)
+    allow(ping_checker).to receive(:ping?).and_return(false)
 
     post '/payload', '{"msg": "Imma hacker lemme in!"}'
 
     expect(last_response).to_not be_ok
-    expect(last_response.status) == 403
+    expect(last_response.status).to eq(403)
   end
 
   it 'passes on to the api' do
     allow(signature_verifier).to receive(:verify_signature).and_return(true)
-    allow(ping_checker).to receive(:is_ping?).and_return(false)
-    allow(api).to receive(:handle_push).and_return ({'msg': 'Everything is fine.'})
-    
+    allow(ping_checker).to receive(:ping?).and_return(false)
+    allow(api).to receive(:handle_push).and_return('msg' => 'Everything is fine.')
+
     post '/payload', '{}'
 
     expect(last_response).to be_ok
-    expect(last_response.status) == 200
-    expect(JSON.parse(last_response.body)['error']) == 'Everything is fine.'
+    expect(last_response.status).to eq(200)
+    expect(JSON.parse(last_response.body)['msg']).to eq('Everything is fine.')
   end
 
   it 'defers to the api for response code' do
     allow(signature_verifier).to receive(:verify_signature).and_return(true)
-    allow(ping_checker).to receive(:is_ping?).and_return(false)
-    allow(api).to receive(:handle_push).and_return({'error': 'Something went wrong.'})
-    
+    allow(ping_checker).to receive(:ping?).and_return(false)
+    allow(api).to receive(:handle_push).and_return('error' => 'Something went wrong.')
+
     post '/payload', '{}'
 
-    expect(last_response.status) == 400
-    expect(JSON.parse(last_response.body)['error']) == 'Something went wrong.'
+    expect(last_response.status).to eq(400)
+    expect(JSON.parse(last_response.body)['error']).to eq('Something went wrong.')
   end
 end

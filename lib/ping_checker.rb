@@ -1,5 +1,5 @@
 class PingChecker
-  def is_ping?(push)
+  def ping?(push)
     push['zen'].nil? == false
   end
 end

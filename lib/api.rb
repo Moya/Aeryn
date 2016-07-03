@@ -2,36 +2,44 @@ require 'json'
 require 'octokit'
 
 class API
-
   attr_accessor :github_client
+  attr_accessor :team_id
 
-  def initialize(github_client = Octokit::Client.new(:access_token => ENV['GITHUB_TOKEN']))
+  def initialize(github_client = Octokit::Client.new(access_token: ENV['GITHUB_TOKEN']))
     @github_client = github_client
+    @team_id = ENV['CONTRIBUTOR_TEAM_ID']
   end
 
   def handle_push(push)
-    if is_merged?(push)
-      username = push['pull_request']['user']['login']
-      
-      # Should check invitation status too/instead
-      if @github_client.organization_member?(ENV['ORG_NAME'], username)
-        return {'msg' => 'Already a member.'}
-      else
-        team_id = ENV['CONTRIBUTOR_TEAM_ID']
+    return { 'msg' => 'Pull request not yet merged.' } unless merged?(push)
 
-        @github_client.add_team_membership(team_id, username)
+    pull_request = push['pull_request']
+    username = pull_request['user']['login']
+    pr_number = pull_request['number']
+    repo_name = pull_request['base']['repo']['full_name']
 
-        pr_number = push['pull_request']['number']
-        repo_name = push['pull_request']['base']['repo']['full_name']
-        @github_client.add_comment(repo_name, pr_number, ENV['INVITATION_MESSAGE'])
-        return {'msg' => 'Invitation sent.'}
-      end
-    else
-      return {'msg' => 'Pull request not yet merged.'}
-    end
+    return { 'msg' => 'Already a member.' } unless needs_invitation?(@team_id, username)
+
+    invite_and_comment(@team_id, username, pr_number, repo_name)
+
+    { 'msg' => 'Invitation sent.' }
   end
 
-  def is_merged?(push)
-    push['action'] == 'closed' && push['pull_request']['merged'] == true
+  def merged?(push)
+    push['action'] == 'closed' && push['pull_request'] && push['pull_request']['merged'] == true
+  end
+
+  def needs_invitation?(team_id, username)
+    # This raises if the user has not been invited yet, as the happy
+    # path is 'user invitation is pending' or 'user has accepted'.
+    github_client.team_membership(team_id, username)
+    return false
+  rescue Octokit::NotFound
+    return true
+  end
+
+  def invite_and_comment(team_id, username, pr_number, repo_name)
+    github_client.add_team_membership(team_id, username)
+    github_client.add_comment(repo_name, pr_number, ENV['INVITATION_MESSAGE'])
   end
 end
