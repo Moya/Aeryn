@@ -6,7 +6,6 @@ require './lib/ping_checker'
 require './lib/signature_verifier'
 
 class AerynApp < Sinatra::Base
-
   set :logging, true
 
   attr_accessor :signature_verifier
@@ -17,7 +16,7 @@ class AerynApp < Sinatra::Base
       signature_verifier = SignatureVerifier.new,
       ping_checker = PingChecker.new,
       api = API.new
-    )
+  )
     @signature_verifier = signature_verifier
     @ping_checker = ping_checker
     @api = api
@@ -36,12 +35,12 @@ class AerynApp < Sinatra::Base
 
     if is_ping
       logger.info 'Received ping.'
-      halt 200, {'Content-Type' => 'text/plain'}, 'Pong.'
+      halt 200, { 'Content-Type' => 'text/plain' }, 'Pong.'
     end
 
     unless is_valid_sig
       logger.info "Received Unauthorized request: #{request}"
-      halt 403, "Unauthorized."
+      halt 403, 'Unauthorized.'
     end
 
     logger.info 'Received PR action.'

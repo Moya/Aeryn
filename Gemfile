@@ -1,6 +1,6 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-ruby "2.2.5"
+ruby '2.2.5'
 
 gem 'sinatra'
 gem 'json'
@@ -12,7 +12,7 @@ group :development do
   gem 'guard-rubocop'
 end
 
-group :test do 
+group :test do
   gem 'rack-test'
   gem 'rspec'
   gem 'rspec-sinatra'
