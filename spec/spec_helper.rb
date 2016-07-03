@@ -7,12 +7,18 @@ ENV['CONTRIBUTOR_TEAM_ID'] = '1234567'
 ENV['INVITATION_MESSAGE'] = 'Thanks!'
 ENV['GITHUB_TOKEN'] = '12jove8hgowbuv'
 
+require 'octokit'
+require 'sinatra'
+
 require File.join(File.dirname(__FILE__), '..', 'lib/server.rb')
 require File.join(File.dirname(__FILE__), '..', 'lib/api.rb')
+require File.join(File.dirname(__FILE__), '..', 'lib/signature_verifier.rb')
+require File.join(File.dirname(__FILE__), '..', 'lib/ping_checker.rb')
 
 require 'capybara'
 require 'capybara/rspec'
 require 'rspec'
+require 'rack/test'
 
 Capybara.app = AerynApp
 RSpec.configure do |config|

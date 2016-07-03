@@ -1,13 +1,4 @@
 require File.expand_path('../spec_helper', __FILE__)
-require 'server'
-require 'octokit'
-require 'api'
-require 'ping_checker'
-require 'signature_verifier'
-require 'rspec'
-require 'rack/test'
-require 'sinatra'
-
 
 describe 'AerynApp' do
   include Rack::Test::Methods

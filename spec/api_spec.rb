@@ -1,6 +1,4 @@
 require File.expand_path('../spec_helper', __FILE__)
-require 'rspec'
-require 'octokit'
 
 describe 'API' do
   include Rack::Test::Methods

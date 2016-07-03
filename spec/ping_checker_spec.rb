@@ -1,6 +1,4 @@
 require File.expand_path('../spec_helper', __FILE__)
-require 'ping_checker'
-require 'rspec'
 
 describe 'PingChecker' do
   let(:subject) { PingChecker.new }
