@@ -16,9 +16,6 @@
       "description": "The endpoint for GitHub WebHooks to use.",
       "value": "/payload"
     },
-    "ORG_NAME": {
-      "description": "The name of your GitHub organization."
-    },
     "CONTRIBUTOR_TEAM_ID": {
       "description": "The GitHub team identifier, a number accessible through their API."
     },

@@ -2,7 +2,6 @@
 
 ENV['RACK_ENV'] = 'test'
 ENV['WEBHOOK_ENDPOINT'] = '/payload'
-ENV['ORG_NAME'] = 'Organization'
 ENV['CONTRIBUTOR_TEAM_ID'] = '1234567'
 ENV['INVITATION_MESSAGE'] = 'Thanks!'
 ENV['GITHUB_TOKEN'] = '12jove8hgowbuv'
