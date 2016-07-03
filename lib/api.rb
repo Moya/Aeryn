@@ -11,7 +11,8 @@ class API
 
   def handle_push(push)
     if is_merged?(push)
-      username = push['pull_request']['user']['login']
+      pull_request = push['pull_request']
+      username = pull_request['user']['login']
       
       # Should check invitation status too/instead
       if @github_client.organization_member?(ENV['ORG_NAME'], username)
@@ -21,8 +22,8 @@ class API
 
         @github_client.add_team_membership(team_id, username)
 
-        pr_number = push['pull_request']['number']
-        repo_name = push['pull_request']['base']['repo']['full_name']
+        pr_number = pull_request['number']
+        repo_name = pull_request['base']['repo']['full_name']
         @github_client.add_comment(repo_name, pr_number, ENV['INVITATION_MESSAGE'])
         return {'msg' => 'Invitation sent.'}
       end
@@ -32,6 +33,6 @@ class API
   end
 
   def is_merged?(push)
-    push['action'] == 'closed' && push['pull_request']['merged'] == true
+    push['action'] == 'closed' && push['pull_request'] && push['pull_request']['merged'] == true
   end
 end
