@@ -1,8 +1,6 @@
 require File.expand_path('../spec_helper', __FILE__)
 
 describe 'API' do
-  include Rack::Test::Methods
-
   let(:api) { API.new(github_client) }
   let(:github_client) { double(Octokit::Client) }
 
