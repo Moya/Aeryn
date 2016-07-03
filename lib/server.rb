@@ -31,7 +31,7 @@ class AerynApp < Sinatra::Base
     logger.info 'Parsed JSON payload.'
 
     is_ping = ping_checker.ping?(push)
-    is_valid_sig = signature_verifier.verify_signature(payload_body, request)
+    is_valid_sig = signature_verifier.verify_signature(payload_body, request.env['HTTP_X_HUB_SIGNATURE'])
 
     if is_ping
       logger.info 'Received ping.'
