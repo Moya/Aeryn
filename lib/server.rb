@@ -7,12 +7,14 @@ require './lib/signature_verifier'
 
 class AerynApp < Sinatra::Base
 
+  set :logging, true
+
   attr_accessor :signature_verifier
   attr_accessor :ping_checker
   attr_accessor :api
 
   def initialize(
-      signature_verifier = Sinatra::WebHookProcessor.new,
+      signature_verifier = SignatureVerifier.new,
       ping_checker = PingChecker.new,
       api = API.new
     )
@@ -34,21 +36,23 @@ class AerynApp < Sinatra::Base
 
     if is_ping
       logger.info 'Received ping.'
-      status 200
-    elsif is_valid_sig
-      logger.info 'Received PR action.'
-      result = api.handle_push(push)
-      body result.to_json
-      logger.info "Processed PR action: #{result}"
+      halt 200, {'Content-Type' => 'text/plain'}, 'Pong.'
+    end
 
-      if result['error']
-        status 400
-      else
-        status 200
-      end
-    else
+    unless is_valid_sig
       logger.info "Received Unauthorized request: #{request}"
       halt 403, "Unauthorized."
+    end
+
+    logger.info 'Received PR action.'
+    result = api.handle_push(push)
+    body result.to_json
+    logger.info "Processed PR action: #{result}"
+
+    if result['error']
+      status 400
+    else
+      status 200
     end
   end
 end
