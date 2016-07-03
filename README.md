@@ -70,6 +70,8 @@ If you don't see a green checkmark, it means that GitHub wasn't able to reach Ae
 
 ## Contributing
 
+> If you have trouble installing `ffi` when running `bundle install`, try running `brew install coreutils` first.
+
 This project is open source under the MIT license, which means you have full access to the source code and can modify it to fit your own needs.
 
 This project subscribes to the [Moya Contributors Guidelines](https://github.com/Moya/contributors) which TLDR: means we give out push access easily and often. That's actually the whole point of this repo.
