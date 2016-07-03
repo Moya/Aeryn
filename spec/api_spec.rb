@@ -9,19 +9,20 @@ describe 'API' do
   it 'does not invite for unmerged PRs' do
     result = api.handle_push('action' => 'closed', 'pull_request' => { 'merged' => false })
 
-    expect(result['msg']) == 'Pull request not yet merged.'
+    expect(result['msg']).to eq('Pull request not yet merged.')
   end
 
   it 'does not re-invite members' do
     allow(github_client).to receive(:team_membership).with('1234567', 'splendid_username')
 
-    result = api.handle_push('action' => 'closed',
-                             'pull_request' => {
-                               'merged' => true,
-                               'number' => 13,
-                               'user' => { 'login' => 'splendid_username' },
-                               'base' => { 'repo' => { 'full_name' => 'my_repo' } }
-                             })
+    result = api.handle_push(
+      'action' => 'closed',
+      'pull_request' => {
+        'merged' => true,
+        'number' => 13,
+        'user' => { 'login' => 'splendid_username' },
+        'base' => { 'repo' => { 'full_name' => 'my_repo' } }
+      })
 
     expect(result['msg']).to eq('Already a member.')
   end
@@ -32,13 +33,13 @@ describe 'API' do
     allow(github_client).to receive(:add_comment).with('my_repo', 13, 'Thanks!')
 
     result = api.handle_push('action' => 'closed',
-                             'pull_request' => {
-                               'merged' => true,
-                               'number' => 13,
-                               'user' => { 'login' => 'splendid_username' },
-                               'base' => { 'repo' => { 'full_name' => 'my_repo' } }
-                             })
+      'pull_request' => {
+        'merged' => true,
+        'number' => 13,
+        'user' => { 'login' => 'splendid_username' },
+        'base' => { 'repo' => { 'full_name' => 'my_repo' } }
+      })
 
-    expect(result['msg']) == 'Invitation sent.'
+    expect(result['msg']).to eq('Invitation sent.')
   end
 end

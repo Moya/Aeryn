@@ -4,10 +4,10 @@ describe 'PingChecker' do
   let(:subject) { PingChecker.new }
 
   it 'handles a ping' do
-    expect(subject.is_ping?('{"zen": "Howdy there!"}')).to be_truthy
+    expect(subject.ping?('{"zen": "Howdy there!"}')).to be_truthy
   end
 
   it 'handles non-pings' do
-    expect(subject.is_ping?('{"boring_pr_data": "so boring"}')).to be_falsey
+    expect(subject.ping?('{"boring_pr_data": "so boring"}')).to be_falsey
   end
 end

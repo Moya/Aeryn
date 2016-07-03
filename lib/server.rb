@@ -13,9 +13,9 @@ class AerynApp < Sinatra::Base
   attr_accessor :api
 
   def initialize(
-      signature_verifier = SignatureVerifier.new,
-      ping_checker = PingChecker.new,
-      api = API.new
+    signature_verifier = SignatureVerifier.new,
+    ping_checker = PingChecker.new,
+    api = API.new
   )
     @signature_verifier = signature_verifier
     @ping_checker = ping_checker
@@ -30,7 +30,7 @@ class AerynApp < Sinatra::Base
     push = JSON.parse(payload_body)
     logger.info 'Parsed JSON payload.'
 
-    is_ping = @ping_checker.is_ping?(push)
+    is_ping = @ping_checker.ping?(push)
     is_valid_sig = @signature_verifier.verify_signature(payload_body, request)
 
     if is_ping

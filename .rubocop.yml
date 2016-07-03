@@ -1,0 +1,11 @@
+AllCops:
+  DisplayCopNames: true
+
+Metrics/LineLength:
+  Max: 120
+
+Documentation:
+  Enabled: false
+
+Style/AlignParameters:
+  EnforcedStyle: with_fixed_indentation

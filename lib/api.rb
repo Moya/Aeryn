@@ -3,31 +3,29 @@ require 'octokit'
 
 class API
   attr_accessor :github_client
+  attr_accessor :team_id
 
   def initialize(github_client = Octokit::Client.new(access_token: ENV['GITHUB_TOKEN']))
     @github_client = github_client
+    @team_id = ENV['CONTRIBUTOR_TEAM_ID']
   end
 
   def handle_push(push)
-    if is_merged?(push)
-      pull_request = push['pull_request']
-      username = pull_request['user']['login']
-      team_id = ENV['CONTRIBUTOR_TEAM_ID']
-      pr_number = pull_request['number']
-      repo_name = pull_request['base']['repo']['full_name']
+    return { 'msg' => 'Pull request not yet merged.' } unless merged?(push)
 
-      if needs_invitation?(team_id, username)
-        invite_and_comment(team_id, username, pr_number, repo_name)
-        return { 'msg' => 'Invitation sent.' }
-      else
-        return { 'msg' => 'Already a member.' }
-      end
-    else
-      return { 'msg' => 'Pull request not yet merged.' }
-    end
+    pull_request = push['pull_request']
+    username = pull_request['user']['login']
+    pr_number = pull_request['number']
+    repo_name = pull_request['base']['repo']['full_name']
+
+    return { 'msg' => 'Already a member.' } unless needs_invitation?(@team_id, username)
+
+    invite_and_comment(@team_id, username, pr_number, repo_name)
+
+    { 'msg' => 'Invitation sent.' }
   end
 
-  def is_merged?(push)
+  def merged?(push)
     push['action'] == 'closed' && push['pull_request'] && push['pull_request']['merged'] == true
   end
 
