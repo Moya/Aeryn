@@ -20,5 +20,4 @@ group :test do
   gem 'rspec-mocks'
 
   gem 'danger'
-  gem 'rspec_junit_formatter'
 end
