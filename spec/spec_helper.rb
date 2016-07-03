@@ -5,9 +5,10 @@ ENV['WEBHOOK_ENDPOINT'] = '/payload'
 ENV['ORG_NAME'] = 'Organization'
 ENV['CONTRIBUTOR_TEAM_ID'] = '1234567'
 ENV['INVITATION_MESSAGE'] = 'Thanks!'
+ENV['GITHUB_TOKEN'] = '12jove8hgowbuv'
 
 require File.join(File.dirname(__FILE__), '..', 'lib/server.rb')
-require File.join(File.dirname(__FILE__), '..', 'lib/web_hook_processor.rb')
+require File.join(File.dirname(__FILE__), '..', 'lib/api.rb')
 
 require 'capybara'
 require 'capybara/rspec'
