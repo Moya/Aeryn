@@ -1,3 +1,2 @@
-require './server'
+require './lib/server'
 run AerynApp
-
