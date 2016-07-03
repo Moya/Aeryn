@@ -30,8 +30,8 @@ class AerynApp < Sinatra::Base
     push = JSON.parse(payload_body)
     logger.info 'Parsed JSON payload.'
 
-    is_ping = @ping_checker.ping?(push)
-    is_valid_sig = @signature_verifier.verify_signature(payload_body, request)
+    is_ping = ping_checker.ping?(push)
+    is_valid_sig = signature_verifier.verify_signature(payload_body, request)
 
     if is_ping
       logger.info 'Received ping.'

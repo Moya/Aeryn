@@ -117,7 +117,6 @@ PLATFORMS
 
 DEPENDENCIES
   capybara
-  guard
   guard-rspec
   guard-rubocop
   json

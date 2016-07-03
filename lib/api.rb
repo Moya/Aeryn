@@ -32,14 +32,14 @@ class API
   def needs_invitation?(team_id, username)
     # This raises if the user has not been invited yet, as the happy
     # path is 'user invitation is pending' or 'user has accepted'.
-    @github_client.team_membership(team_id, username)
+    github_client.team_membership(team_id, username)
     return false
   rescue Octokit::NotFound
     return true
   end
 
   def invite_and_comment(team_id, username, pr_number, repo_name)
-    @github_client.add_team_membership(team_id, username)
-    @github_client.add_comment(repo_name, pr_number, ENV['INVITATION_MESSAGE'])
+    github_client.add_team_membership(team_id, username)
+    github_client.add_comment(repo_name, pr_number, ENV['INVITATION_MESSAGE'])
   end
 end
