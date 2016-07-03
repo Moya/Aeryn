@@ -18,9 +18,28 @@ end
 
 # Warn about un-updated tests
 if has_app_changes && !has_test_changes
-  warn "Tests were not updated"
+  warn 'Tests were not updated'
 end
 
 if github.pr_body.length < 5
   fail 'Please provide a summary in the Pull Request description'
+end
+
+# TODO: This could be a danger plugin
+files_to_lint = (modified_files + added_files).select { |f| f.end_with? 'rb' }
+rubocop_results = files_to_lint.map { |f| JSON.parse(`bundle exec rubocop -f json #{f}`)['files'] }.flatten
+offending_files = rubocop_results.select { |f| f['offenses'].count > 0 }
+
+unless offending_files.empty?
+  message = '### Rubocop violations'
+  message << 'File | Line | Reason |\n'
+  message << '| --- | ----- | ----- |\n'  
+
+  offending_files.each do |f|
+    f['offenses'].each do |o|
+      message << "#{f['path']} | #{o['location']['line']} | #{o['message']} \n"
+    end
+  end
+
+  markdown message
 end
