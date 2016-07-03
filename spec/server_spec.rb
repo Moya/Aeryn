@@ -30,7 +30,7 @@ describe 'AerynApp' do
   it 'passes on to the api' do
     allow(signature_verifier).to receive(:verify_signature).and_return(true)
     allow(ping_checker).to receive(:is_ping?).and_return(false)
-    allow(api).to receive(:handle_push).and_return ({'msg': 'Everything is fine.'})
+    allow(api).to receive(:handle_push).and_return ({'msg' => 'Everything is fine.'})
     
     post '/payload', '{}'
 
@@ -42,7 +42,7 @@ describe 'AerynApp' do
   it 'defers to the api for response code' do
     allow(signature_verifier).to receive(:verify_signature).and_return(true)
     allow(ping_checker).to receive(:is_ping?).and_return(false)
-    allow(api).to receive(:handle_push).and_return({'error': 'Something went wrong.'})
+    allow(api).to receive(:handle_push).and_return({'error' => 'Something went wrong.'})
     
     post '/payload', '{}'
 
