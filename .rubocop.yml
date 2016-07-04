@@ -1,6 +1,3 @@
-AllCops:
-  DisplayCopNames: true
-
 Metrics/LineLength:
   Max: 120
 
