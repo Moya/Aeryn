@@ -20,4 +20,5 @@ group :test do
   gem 'rspec-mocks'
 
   gem 'danger'
+  gem 'danger-rubocop'
 end
