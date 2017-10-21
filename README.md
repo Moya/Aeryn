@@ -1,3 +1,7 @@
+<p align="center">
+  <img height="200" src="design/logo.png" />
+</p>
+
 # Aeryn
 
 [![CircleCI](https://circleci.com/gh/Moya/Aeryn.svg?style=svg)](https://circleci.com/gh/Moya/Aeryn)
