@@ -81,3 +81,8 @@ This project is open source under the MIT license, which means you have full acc
 This project subscribes to the [Moya Contributors Guidelines](https://github.com/Moya/contributors) which TLDR: means we give out push access easily and often. That's actually the whole point of this repo.
 
 This repo subscribes to the [Contributor Code of Conduct](http://contributor-covenant.org/version/1/4/), based on the [Contributor Covenant](http://contributor-covenant.org) version 1.4.0. The maintainers take the code of conduct seriously. 
+
+### Organizations using Aeryn
+
+Check out this list of [know organizations using Aeryn](https://github.com/Moya/Aeryn/blob/master/Orgs%20Using%20Aeryn.md).
+Submit a [pull request](https://github.com/Moya/Aeryn/compare) if you'd like to be added to the list!
