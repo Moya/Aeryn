@@ -23,7 +23,7 @@ There are a few prerequisites:
 
 ### Personal Access Token
 
-You'll need to [create a new personal access token](https://github.com/settings/tokens/new) on whatever account will be inviting new contributors (this means the account needs admin writes). The access token needs the `admin:org` scope.
+You'll need to [create a new personal access token](https://github.com/settings/tokens/new) on whatever account will be inviting new contributors (this means the account needs admin writes). The access token needs the `admin:org` and `public_repo` scopes.
 
 ### Team ID
 
