@@ -6,4 +6,4 @@ their organization. Submit a [pull request](https://github.com/Moya/Aeryn/compar
 - [Moya](https://github.com/Moya)
 - [MessageKit](https://github.com/MessageKit)
 - [xcodeswift](https://github.com/xcodeswift)
-
+- [styled-components](https://github.com/styled-components)
