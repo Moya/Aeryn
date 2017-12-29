@@ -84,5 +84,5 @@ This repo subscribes to the [Contributor Code of Conduct](http://contributor-cov
 
 ### Organizations using Aeryn
 
-Check out this list of [know organizations using Aeryn](https://github.com/Moya/Aeryn/blob/master/Orgs%20Using%20Aeryn.md).
+Check out this list of [known organizations using Aeryn](https://github.com/Moya/Aeryn/blob/master/Orgs%20Using%20Aeryn.md).
 Submit a [pull request](https://github.com/Moya/Aeryn/compare) if you'd like to be added to the list!
