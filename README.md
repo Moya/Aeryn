@@ -8,6 +8,10 @@
 
 Aeryn is a server app, written in Sinatra, used to invite new contributors to a GitHub organization team once they have a pull request merged. 
 
+## State
+
+This project works for production. However, by this point all of the Aeryn servers ran by the maintainers of this repo have moved to [danger/peril](https://github.com/danger/peril) with an [`aeryn.ts`](https://github.com/RxSwiftCommunity/peril/blob/master/org/aeryn.ts) file.
+
 ## Motivation
 
 Moya's [contributor guidelines](https://github.com/Moya/contributors) explain in detail what we'll summarize here: we believe in giving push access to contributors after they have a pull request merged. On Moya's [main repo](https://github.com/Moya/Moya), we've been practicing this since June 2015; the practice has led to an engaged, respectful community helping to improve the project.
