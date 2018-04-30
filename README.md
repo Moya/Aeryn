@@ -6,11 +6,11 @@
 
 [![CircleCI](https://circleci.com/gh/Moya/Aeryn.svg?style=svg)](https://circleci.com/gh/Moya/Aeryn)
 
-Aeryn is a server app, written in Sinatra, used to invite new contributors to a GitHub organization team once they have a pull request merged. 
+Aeryn is a server app, written in Sinatra, used to invite new contributors to a GitHub organization team once they have a pull request merged.
 
 ## State
 
-This project works for production. However, by this point all of the Aeryn servers ran by the maintainers of this repo have moved to [danger/peril](https://github.com/danger/peril) with an [`aeryn.ts`](https://github.com/RxSwiftCommunity/peril/blob/master/org/aeryn.ts) file.
+This project works for production. However, by this point all of the Aeryn servers ran by the maintainers of this repo have moved to [danger/peril](https://github.com/danger/peril) with an [`aeryn.ts`](https://github.com/Moya/moya-peril/blob/master/org/aeryn.ts) file.
 
 ## Motivation
 
@@ -58,7 +58,7 @@ If you don't want to use Heroku, you can copy `.env.sample` to `.env` to set env
 
 ### Configuring the WebHook
 
-Once deployed, we need to point your GitHub repo(s) at the server. Go to your repository's settings page and WebHook tab, and create a new WebHook. 
+Once deployed, we need to point your GitHub repo(s) at the server. Go to your repository's settings page and WebHook tab, and create a new WebHook.
 
 You'll need the server's address, as well as the `WEBHOOK_ENDPOINT` environment variable you set up earlier. So if your server is at `https://example.com` and the endpoint is `/payload`, then the Payload URL for the WebHook is `https://example.com/payload`.
 
@@ -84,7 +84,7 @@ This project is open source under the MIT license, which means you have full acc
 
 This project subscribes to the [Moya Contributors Guidelines](https://github.com/Moya/contributors) which TLDR: means we give out push access easily and often. That's actually the whole point of this repo.
 
-This repo subscribes to the [Contributor Code of Conduct](http://contributor-covenant.org/version/1/4/), based on the [Contributor Covenant](http://contributor-covenant.org) version 1.4.0. The maintainers take the code of conduct seriously. 
+This repo subscribes to the [Contributor Code of Conduct](http://contributor-covenant.org/version/1/4/), based on the [Contributor Covenant](http://contributor-covenant.org) version 1.4.0. The maintainers take the code of conduct seriously.
 
 ### Organizations using Aeryn
 
