@@ -11,3 +11,4 @@ their organization. Submit a [pull request](https://github.com/Moya/Aeryn/compar
 - [RxSwiftCommunity](https://github.com/RxSwiftCommunity)
 - [SwifterSwift](https://github.com/SwifterSwift)
 - [gatsbyjs](https://github.com/gatsbyjs)
+- [ReSwift](https://github.com/ReSwift)
